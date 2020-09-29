@@ -2,13 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import State from './State';
-import Daily from './Daily';
+import LiveStation from './LiveStation'
+import StationLive from './StationLive'
+import Form from './Form';
+import Form2 from './Form2';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Daily />
+    <Form2 />
   </React.StrictMode>,
   document.getElementById('root')
 );
