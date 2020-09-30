@@ -1,15 +1,16 @@
 import React from 'react';
 import { Button ,FormControl,InputLabel,Input, List, ListItem, ListItemAvatar, ListItemText} from '@material-ui/core';
 import axios from 'axios';
-import './Form.css'
+import Table from 'react-bootstrap/Table'
+import Spinner from 'react-bootstrap/Spinner'
+import 'bootstrap/dist/css/bootstrap.min.css';
 class Form2 extends React.Component {
   constructor(props) {
 		super(props)
 
 		this.state = {
 			sationCode: '',
-			comments: '',
-      		topic: 2,
+      		hours: 2,
             result:[]
 		}
 	}
@@ -20,15 +21,10 @@ class Form2 extends React.Component {
 		})
 	}
 
-	handleCommentsChange = event => {
-		this.setState({
-			comments: event.target.value
-		})
-	}
 
 	handleTopicChange = event => {
 		this.setState({
-			topic: event.target.value
+			hours: event.target.value
 		})
 	}
 	async makeRequest(url) {
@@ -36,7 +32,8 @@ class Form2 extends React.Component {
 			method: 'get',
 			url: url
 		}
-		const res = await axios(config)
+        const res = await axios(config)
+        console.log(res)
 		this.setState({
 			result: res.data['Trains']
 		})
@@ -46,7 +43,7 @@ class Form2 extends React.Component {
 
 	handleSubmit = event => {
 		 event.preventDefault()
-		 const url=`https://indianrailapi.com/api/v2/LiveStation/apikey/089b399c02622174626b2b7064f21e7a/StationCode/${this.state.sationCode}/hours/4/`;
+		 const url=`https://indianrailapi.com/api/v2/LiveStation/apikey/089b399c02622174626b2b7064f21e7a/StationCode/${this.state.sationCode}/hours/${this.state.hours}/`;
 		 console.log(url)
 	     this.makeRequest(url);
 		 
@@ -57,46 +54,65 @@ class Form2 extends React.Component {
 
 	render() {
 		console.log(this.state.result)
-		const { sationCode, comments, topic } = this.state
+		const { sationCode, hours } = this.state
 		return (
       <div>
 			<form onSubmit={this.handleSubmit}>
 				<div>
-					<label>sationCode </label>
+					<label>Sation Code </label>
 					<input
 						type="text"
 						value={sationCode}
 						onChange={this.handleUsernameChange}
+						
 					/>
 				</div>
 				<div>
-					<label>Comments</label>
-					<textarea
-						value={comments}
-						onChange={this.handleCommentsChange}
-					/>
-				</div>
-				<div>
-					<label>Topic</label>
-					<select value={topic} onChange={this.handleTopicChange}>
+					<label>Hours</label>
+					<select value={hours} onChange={this.handleTopicChange}>
 						<option value="2">2</option>
 						<option value="4">4</option>
 					</select>
 				</div>
-				<button type="submit">Submit</button>
+				<button disabled={!this.state.sationCode} type="submit">Submit</button>
 			</form>
-      {this.state.result.map(data => (
-        <List className='todo_list'>
-          <ListItem>
-            <ListItemAvatar>
-            </ListItemAvatar>
-            <ListItemText/>
-          </ListItem>
-          <ListItemText primary={data.Name}/>
-          <ListItemText primary={data.Number}/>
-        </List>
+      
+        <div>
+        <Table id="Station" responsive="sm">
+          <thead>
+            <tr>
+              <th>Number</th>
+              <th>Name</th>
+              <th>Schedule Arrival</th>
+              <th>Schedule Departure</th>
+              <th>Expected Arrival</th>
+              <th>Expected Departure</th>
+              <th>Delay</th>
+              <th>Platform</th>
+            </tr>
+         {!this.state.result
+            <Spinner>
+            <span className="sr-only">Loading...</span>
+         }
+          </thead>
+          {this.state.result.map(data => (
+          <tbody>
+            <tr>
+              <td>{data.Number}</td>
+              <td>{data.Name}</td>
+              <td>{data.ScheduleArrival}</td>
+              <td>{data.ScheduleDeparture}</td>
+              <td>{data.ExpectedArrival}</td>
+              <td>{data.ExpectedDeparture}</td>
+              <td>{data.Delay}</td>
+              <td>{data.Platform}</td>
+            </tr>
+          </tbody>
+          ))}
+        </Table>
+      </div>
 
-        ))}
+        
       </div>
 		)
 	}
