@@ -57,7 +57,7 @@ class Form2 extends React.Component {
 		const { sationCode, hours } = this.state
 		return (
       <div>
-			<form onSubmit={this.handleSubmit}>
+			<form onSubmit={this.handleSubmit} responsive="sm">
 				<div>
 					<label>Sation Code </label>
 					<input

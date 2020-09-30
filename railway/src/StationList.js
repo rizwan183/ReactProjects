@@ -76,15 +76,15 @@ class StationList extends React.Component {
 		const { sationCode, destination } = this.state
 		return (
       <div>
-			<form onSubmit={this.handleSubmit}>
-				<div>
+			<form onSubmit={this.handleSubmit} responsive="sm">
+				<div responsive="sm">
 					<label>Source Station </label>
 					<input
 						type="text"
 						value={sationCode}
 						onChange={this.handleUsernameChange}
 					/>
-					<select disabled={!this.state.sationCode} class="selectpicker" data-live-search="true">
+					<select class="selectpicker" data-live-search="true">
 					<option>Seletect</option>
 					{this.state.result1.map(data => (
 						<option value={data.StationCode}>{data.NameEn} {data.NameHn} - {data.StationCode}</option>
@@ -96,14 +96,14 @@ class StationList extends React.Component {
 						value={destination}
 						onChange={this.handleDestinationChange}
 					/>
-					<select disabled={!this.state.sationCode} class="selectpicker" data-live-search="true">
+					<select class="selectpicker" data-live-search="true">
 					<option>Seletect</option>
 					{this.state.result2.map(data => (
 						<option value={data.StationCode}>{data.NameEn} {data.NameHn} - {data.StationCode}</option>
 					))}
 					</select>
 				</div>
-				<button disabled={!this.state.sationCode} type="submit">Submit</button>
+				{/* <button disabled={!this.state.sationCode} type="submit">Submit</button> */}
 			</form>
       
         <div>

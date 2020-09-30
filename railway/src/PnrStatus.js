@@ -44,8 +44,8 @@ class PnrStatus extends React.Component {
 		console.log(this.state.result)
 		const { pnrNumber } = this.state
 		return (
-      <div>
-			<form onSubmit={this.handleSubmit}>
+      <div responsive="sm">
+			<form onSubmit={this.handleSubmit} responsive="sm">
 				<div>
 					<label>PNR NUMBER</label>
 					<input
@@ -57,7 +57,7 @@ class PnrStatus extends React.Component {
 				<button disabled={!this.state.pnrNumber} type="submit">Submit</button>
 			</form>
       
-        <div>
+        <div responsive="sm">
         <Table id="Station" responsive="sm">
           <thead>
             <tr>
