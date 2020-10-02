@@ -4,6 +4,7 @@ import axios from 'axios';
 import Table from 'react-bootstrap/Table'
 import Spinner from 'react-bootstrap/Spinner'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './Form2.css'
 class Form2 extends React.Component {
   constructor(props) {
 		super(props)
@@ -66,8 +67,6 @@ class Form2 extends React.Component {
 						onChange={this.handleUsernameChange}
 						
 					/>
-				</div>
-				<div>
 					<label>Hours</label>
 					<select value={hours} onChange={this.handleTopicChange}>
 						<option value="2">2</option>

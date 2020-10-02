@@ -3,6 +3,7 @@ import { Button ,FormControl,InputLabel,Input, List, ListItem, ListItemAvatar, L
 import axios from 'axios';
 import Table from 'react-bootstrap/Table'
 import Spinner from 'react-bootstrap/Spinner'
+import './Form2.css'
 class PnrStatus extends React.Component {
   constructor(props) {
 		super(props)
