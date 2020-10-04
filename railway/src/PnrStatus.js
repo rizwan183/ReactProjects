@@ -26,9 +26,15 @@ class PnrStatus extends React.Component {
 		}
         const res = await axios(config)
         console.log(res.data)
-		this.setState({
-			result: [res.data]
-		})
+        if(res.data.ResponseCode==201){
+            console.log("error")
+            alert(res.data.Message)
+            this.state.pnrNumber=''
+        }
+        else{
+        this.setState({
+          result: [res.data]
+        })}
 		// console.log(res.data['Trains'])
 		// console.log(res.data);
 	}
@@ -46,20 +52,60 @@ class PnrStatus extends React.Component {
 		const { pnrNumber } = this.state
 		return (
       <div responsive="sm">
+        <p>
+
+</p>
+<p>
+  
+</p>
 			<form onSubmit={this.handleSubmit} responsive="sm">
 				<div>
-					<label>PNR NUMBER</label>
+					<label>PNR Number</label>
 					<input
 						type="text"
 						value={pnrNumber}
 						onChange={this.handlePnrChange}
 					/>
 				</div>
-				<button disabled={!this.state.pnrNumber} type="submit">Submit</button>
+        <p>
+          <p>
+            
+          </p>
+          <button disabled={!this.state.pnrNumber} type="submit">Submit</button>
+        </p>
+				
 			</form>
+      <div>
+      <div>
+    
+		{this.state.result.map(data => (
+		<div class="col-12 col-sm-6 col-md-6 col-lg-3">
+				<div class="card h-100 mb-4">                    
+					<div class="card-header">                                
+						<h6 class="card-title m-0 p-0 font-weight-bolder text-secondary">PNR Number {data.PnrNumber}</h6>
+						<h6 class="card-title m-0 p-0 font-weight-bolder text-secondary">Train Train Number   {data.TrainNumber}</h6>
+            <h6 class="card-title m-0 p-0 font-weight-bolder text-secondary">Current Status  {data.Passangers[0].CurrentStatus}</h6>
+					</div>
+					<div class="card-body text-left">
+			
+						<p class="card-text">Train Name   {data.TrainName} </p>
+						<p class="card-text">Journey Class {data.JourneyClass}</p>
+						<p class="card-text">Chat Prepared   {data.ChatPrepared}</p>
+						<p class="card-text">From {data.From}</p>		
+						<p class="card-text">To              {data.To}</p>	
+						<p class="card-text">Journey Date    {data.JourneyDate}</p>		      
+            <p class="card-text">Passangers      {data.Passangers[0].Passenger}</p>	
+						<p class="card-text">Booking Status  {data.Passangers[0].CurrentStatus}</p>		                         
+					</div>
+				</div>
+		</div>
+		)
+		)}
+    </div>
+    </div>
       
-        <div responsive="sm">
-        <Table id="Station" responsive="sm">
+        {/* <div class="table-responsive" responsive="sm">
+        <Table className="table" id="Station" responsive="sm">
           <thead>
             <tr>
               <th>PNR Number</th>
@@ -97,9 +143,8 @@ class PnrStatus extends React.Component {
           </tbody>
           ))}
         </Table>
-      </div>
+      </div> */}
 
-        
       </div>
 		)
 	}

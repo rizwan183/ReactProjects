@@ -34,15 +34,29 @@ class Form2 extends React.Component {
 			url: url
 		}
         const res = await axios(config)
-        console.log(res)
-		this.setState({
+		console.log(res.data)
+		if (res.data.Message=='0 Trains Found.')
+		{
+			alert(res.data.Message)
+		}
+		else{		
+			this.setState({
 			result: res.data['Trains']
 		})
+	}
 		// console.log(res.data['Trains'])
 		// console.log(res.data);
 	}
 
 	handleSubmit = event => {
+		if (this.state.sationCode=='ALD') {
+			this.state.sationCode='PRYJ'
+			console.log("underage");
+		}
+		if (this.state.sationCode=='ald') {
+			this.state.sationCode='PRYJ'
+			console.log("underage");
+		}
 		 event.preventDefault()
 		 const url=`https://indianrailapi.com/api/v2/LiveStation/apikey/089b399c02622174626b2b7064f21e7a/StationCode/${this.state.sationCode}/hours/${this.state.hours}/`;
 		 console.log(url)
@@ -57,27 +71,63 @@ class Form2 extends React.Component {
 		console.log(this.state.result)
 		const { sationCode, hours } = this.state
 		return (
-      <div>
+        <div >
+		  <p>
+
+		  </p>
+		  <p>
+
+		  </p>
 			<form onSubmit={this.handleSubmit} responsive="sm">
-				<div>
-					<label>Sation Code </label>
+				<div >
+					<label>Station Code </label>
 					<input
 						type="text"
 						value={sationCode}
 						onChange={this.handleUsernameChange}
 						
 					/>
-					<label>Hours</label>
+					<p>
+						<p> </p>
+					<label> Hours </label>
 					<select value={hours} onChange={this.handleTopicChange}>
 						<option value="2">2</option>
 						<option value="4">4</option>
 					</select>
+					</p>
 				</div>
+				<p>
 				<button disabled={!this.state.sationCode} type="submit">Submit</button>
+				</p>
+				
 			</form>
-      
-        <div>
-        <Table id="Station" responsive="sm">
+		<div>
+		<div>
+		{this.state.result.map(data => (
+		<div class="col-12 col-sm-6 col-md-6 col-lg-3">
+				<div class="card h-100 mb-4">                    
+					<div class="card-header">                                
+						<h6 class="card-title m-0 p-0 font-weight-bolder text-secondary">Train Number {data.Number}</h6>
+						<h6 class="card-title m-0 p-0 font-weight-bolder text-secondary">Train Name   {data.Name}</h6>
+					</div>
+					<div class="card-body text-left">
+			
+						<p class="card-text">Schedule Arrival   {data.ScheduleArrival} </p>
+						<p class="card-text">Schedule Departure {data.ScheduleDeparture}</p>
+						<p class="card-text">Expected Arrival   {data.ExpectedArrival}</p>
+						<p class="card-text">Expected Departure {data.ExpectedDeparture}</p>		
+						<p class="card-text">Delay              {data.Delay}</p>	
+						<p class="card-text">Platform           {data.Platform}</p>		                             
+					</div>
+				</div>
+		</div>
+		)
+		)}
+      </div>
+	  </div>
+	 
+        {/* <div className="table-responsive">
+        <Table className="table" id="Station" responsive="sm">
           <thead>
             <tr>
               <th>Number</th>
@@ -109,9 +159,8 @@ class Form2 extends React.Component {
           </tbody>
           ))}
         </Table>
-      </div>
-
-        
+      </div> */}  
+	 
       </div>
 		)
 	}
