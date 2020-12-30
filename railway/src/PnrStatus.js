@@ -1,9 +1,7 @@
 import React from 'react';
-import { Button ,FormControl,InputLabel,Input, List, ListItem, ListItemAvatar, ListItemText} from '@material-ui/core';
 import axios from 'axios';
-import Table from 'react-bootstrap/Table'
-import Spinner from 'react-bootstrap/Spinner'
 import './Form2.css'
+import bg from './bg.jpg'
 class PnrStatus extends React.Component {
   constructor(props) {
 		super(props)
@@ -52,6 +50,7 @@ class PnrStatus extends React.Component {
 		const { pnrNumber } = this.state
 		return (
       <div responsive="sm">
+        <div  styles={{ backgroundImage:`url(${bg})` }}></div>
         <p>
 
 </p>

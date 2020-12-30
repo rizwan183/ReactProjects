@@ -3,7 +3,7 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import moment from 'moment'
 import DatePicker from "react-datepicker";
-
+import bg from './bg.jpg'
  
 import "react-datepicker/dist/react-datepicker.css";
 class StationList extends React.Component {
@@ -145,6 +145,7 @@ class StationList extends React.Component {
 		const { sationCode, destination,select1,select2} = this.state
 		return (
       <div>
+		  <div  styles={{ backgroundImage:`url(${bg})` }}></div>
 			<form onSubmit={this.handleSubmit} responsive="sm">
 				<div>
 					<label>Source Station</label>

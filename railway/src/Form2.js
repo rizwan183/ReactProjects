@@ -1,8 +1,5 @@
 import React from 'react';
-import { Button ,FormControl,InputLabel,Input, List, ListItem, ListItemAvatar, ListItemText} from '@material-ui/core';
 import axios from 'axios';
-import Table from 'react-bootstrap/Table'
-import Spinner from 'react-bootstrap/Spinner'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Form2.css'
 class Form2 extends React.Component {
@@ -72,6 +69,7 @@ class Form2 extends React.Component {
 		const { sationCode, hours } = this.state
 		return (
         <div >
+			{/* <div  styles={{ backgroundImage:`url(${bg})` }}></div> */}
 		  <p>
 
 		  </p>

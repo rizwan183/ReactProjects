@@ -1,14 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-
-import Tap from './Tap'
 import * as serviceWorker from './serviceWorker';
+import Menu from './Menu.js'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Tap />
+    <Menu />
   </React.StrictMode>,
   document.getElementById('root')
 );
